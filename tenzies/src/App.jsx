@@ -7,7 +7,7 @@ function App() {
   const { width, height } = useWindowSize();
 
   const genRandom = () => {
-    var ArrOfrandom = new Array(3)
+    var ArrOfrandom = new Array(10)
       .fill(0)
       .map(() => ({ value: Math.ceil(Math.random() * 6), isHold: false }));
     return ArrOfrandom;
@@ -19,11 +19,12 @@ function App() {
         i === index ? { ...die, isHold: !die.isHold } : die
       )
     );
+    
   };
-
   let checkWon = dice.every(
     (die) => die.value === dice[0].value && die.isHold === true
   );
+
   const [won, setWon] = React.useState(checkWon);
   // checkWon ? setWon(true):setWon(false)
 
@@ -48,7 +49,10 @@ function App() {
           padding: "10px",
           borderRadius: "10px",
         }}
-        onClick={() => setWon(false)}
+        onClick={() => {
+          setDice(genRandom());
+          setWon(false)
+        }}
       >
         Start New Game
       </button>
